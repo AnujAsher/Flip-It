@@ -6,7 +6,7 @@ This game was made for the [Nokia 3310 Jam 3](https://itch.io/jam/nokiajam3).
 
 ## How to play
     8462|WASD|Arrow Keys - Move
-    .                    - Enter
+    ↲                    - Enter
     /                    - Back
 
 Move the car around the grid and reach the target cell with all lights off to win.
@@ -18,8 +18,8 @@ Create your own levels and share them.
 Levels are created in reverse from target position to starting position.
 The editor works in three stages -
 
- - Resize the grid using `1|7` and `3|9`. Move to the target cell and press `.` to start drawing.
- - Move around to flip cells until one before the starting position and press `.` to finish drawing.
+ - Resize the grid using `1|7` and `3|9`. Move to the target cell and press `↲` to start drawing.
+ - Move around to flip cells until one before the starting position and press `↲` to finish drawing.
  - A border around the screen will indicate the last move. Move one last time to finish creating the level.
 
 A code will be displayed which can be entered in the loader from the level selection screen.

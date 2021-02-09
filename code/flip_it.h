@@ -19,7 +19,7 @@
 #define ANY_DOWN_PRESSED() (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN) || NUM_KEY_PRESSED(2))
 #define ANY_UP_PRESSED() (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP) || NUM_KEY_PRESSED(8))
 #define ANY_DIVIDE_PRESSED() (IsKeyPressed(KEY_KP_DIVIDE) || IsKeyPressed(KEY_SLASH))
-#define ANY_DECIMAL_PRESSED() (IsKeyPressed(KEY_KP_DECIMAL) || IsKeyPressed(KEY_PERIOD))
+#define ANY_ENTER_PRESSED() (IsKeyPressed(KEY_KP_ENTER) || IsKeyPressed(KEY_ENTER))
 
 // this is formatted weirdly because the printing function doesn't do any formatting
 #define HELP_TEXT \

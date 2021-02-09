@@ -197,10 +197,10 @@ static mode splash_screen(int *counter)
 
 	if(title_length >= sizeof(title) && (*counter & 31) < 16)
 	{
-		draw_text(15, 30, "Press <.>");
+		draw_text(15, 30, "Press <\r>");
 	}
 
-	if(ANY_DECIMAL_PRESSED()) result = mode_main_menu;
+	if(ANY_ENTER_PRESSED()) result = mode_main_menu;
 
 	return result;
 }
@@ -238,7 +238,7 @@ typedef struct mode_list
 	{
 		++data->selected;
 	}
-	else if(ANY_DECIMAL_PRESSED())
+	else if(ANY_ENTER_PRESSED())
 	{
 		result = modes[data->selected].mode_value;
 	}
@@ -276,7 +276,7 @@ static mode select_level(select_level_data *data)
 	{
 		++data->level;
 	}
-	else if(ANY_DECIMAL_PRESSED())
+	else if(ANY_ENTER_PRESSED())
 	{
 		g_loaded_level = g_level_strings[data->level];
 		result = mode_play_level;
@@ -306,7 +306,7 @@ static mode loader(int *counter)
 	}
 
 	draw_text(3, 2, "Enter a level");
-	draw_text(0, 40, "</>-del <.>-ok");
+	draw_text(0, 40, "</>-del <\r>-ok");
 	// this text isn't scrollable by the player, it only scrolls when it overflows
 	draw_scrollable_text(2, 10, 76, 28, g_level_buffer, -1);
 
@@ -327,7 +327,7 @@ static mode loader(int *counter)
 	{
 		g_level_buffer[length-1] = 0;
 	}
-	else if(ANY_DECIMAL_PRESSED())
+	else if(ANY_ENTER_PRESSED())
 	{
 		g_loaded_level = g_level_buffer;
 		result = mode_play_level;
@@ -479,7 +479,7 @@ static mode editor(editor_data *data)
 		{
 			++data->level.size.y;
 		}
-		else if(ANY_DECIMAL_PRESSED())
+		else if(ANY_ENTER_PRESSED())
 		{
 			// target cell needs to be flipped
 			flip_it(&data->level);
@@ -494,7 +494,7 @@ static mode editor(editor_data *data)
 			flip_it(&data->level);
 		}
 
-		if(ANY_DECIMAL_PRESSED()) data->mode = editor_mode_end;
+		if(ANY_ENTER_PRESSED()) data->mode = editor_mode_end;
 	} break;
 	case editor_mode_end:
 	{
@@ -521,7 +521,7 @@ static mode editor(editor_data *data)
 	{
 		draw_text(12, 2, "Your level");
 		data->scroll_position = draw_scrollable_text(2, 10, 76, 36, g_level_buffer, data->scroll_position);
-		if(ANY_DECIMAL_PRESSED()) result = mode_main_menu;
+		if(ANY_ENTER_PRESSED()) result = mode_main_menu;
 	}
 
 	if(ANY_DIVIDE_PRESSED()) result = mode_main_menu;
@@ -543,7 +543,7 @@ static mode settings_menu()
 {
 	mode result = mode_settings_menu;
 
-	if(ANY_DECIMAL_PRESSED()) g_settings.mute = !g_settings.mute;
+	if(ANY_ENTER_PRESSED()) g_settings.mute = !g_settings.mute;
 
 	// should it be called settings if there is only one setting? (ﾟ ｰﾟ )ゝ
 	draw_text(18, 2, "Settings");
@@ -565,7 +565,7 @@ static mode credits()
 	draw_text(2, 20, "Anuj Asher"); // that's me! ٩( ^ᴗ^ )۶
 	draw_text(2, 30, "Made with:");
 	draw_text(2, 38, "raylib");
-	if(ANY_DIVIDE_PRESSED() || ANY_DECIMAL_PRESSED()) result = mode_main_menu;
+	if(ANY_DIVIDE_PRESSED() || ANY_ENTER_PRESSED()) result = mode_main_menu;
 
 	return result;
 }
@@ -579,7 +579,7 @@ static mode load_error()
 	draw_text(24, 18, "level!");
 	draw_text(18, 40, "</>-back");
 
-	if(ANY_DIVIDE_PRESSED() || ANY_DECIMAL_PRESSED()) result = mode_select_level;
+	if(ANY_DIVIDE_PRESSED() || ANY_ENTER_PRESSED()) result = mode_select_level;
 
 	return result;
 }
