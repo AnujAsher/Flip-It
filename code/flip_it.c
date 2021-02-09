@@ -149,6 +149,7 @@ static void save_level(level_data *data)
 #undef SET_DIGIT
 
 	*level = 0;
+	TraceLog(LOG_INFO, "Level Saved: %s", g_level_buffer);
 }
 
 static void draw_level(level_data *data)
@@ -415,9 +416,8 @@ static mode play_level(level_data *data, int *counter)
 
 // the editor works in modes
 // init    - initialise data and set mode to start
-// start   - size the grid and select the starting position
-// draw    - move around flipping the cells
-// end     - make the last move without a flip
+// start   - size the grid and press enter to select the target position
+// draw    - move around flipping the cells and press enter to select the starting position
 // display - show the level string
 static mode editor(editor_data *data)
 {
@@ -493,22 +493,12 @@ static mode editor(editor_data *data)
 		{
 			flip_it(&data->level);
 		}
-
-		if(ANY_ENTER_PRESSED()) data->mode = editor_mode_end;
-	} break;
-	case editor_mode_end:
-	{
-		// border around the screen to identify end mode
-		DrawRectangle(               0,                 0, SCREEN_WIDTH,             1, DARK3310);
-		DrawRectangle(               0,                 0,            1, SCREEN_HEIGHT, DARK3310);
-		DrawRectangle(               0, SCREEN_HEIGHT - 1, SCREEN_WIDTH,             1, DARK3310);
-		DrawRectangle(SCREEN_WIDTH - 1,                 0,            1, SCREEN_HEIGHT, DARK3310);
-
-		if(moved)
+		else if(ANY_ENTER_PRESSED())
 		{
+			// flip the start cell again
+			flip_it(&data->level);
 			data->mode = editor_mode_display;
 			save_level(&data->level);
-			TraceLog(LOG_INFO, "Level Saved: %s", g_level_buffer);
 		}
 	} break;
 	}
@@ -521,7 +511,6 @@ static mode editor(editor_data *data)
 	{
 		draw_text(12, 2, "Your level");
 		data->scroll_position = draw_scrollable_text(2, 10, 76, 36, g_level_buffer, data->scroll_position);
-		if(ANY_ENTER_PRESSED()) result = mode_main_menu;
 	}
 
 	if(ANY_DIVIDE_PRESSED()) result = mode_main_menu;

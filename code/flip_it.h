@@ -35,7 +35,8 @@
 	"that cell   " \
 	"and the four" \
 	"neighbouring" \
-	"cells."
+	"cells in a +" \
+	"shape."
 
 typedef struct v2i {
 	int x;
@@ -61,7 +62,6 @@ typedef enum editor_mode
 	editor_mode_init,
 	editor_mode_start,
 	editor_mode_draw,
-	editor_mode_end,
 	editor_mode_display,
 } editor_mode;
 

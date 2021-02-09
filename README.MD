@@ -10,17 +10,26 @@ This game was made for the [Nokia 3310 Jam 3](https://itch.io/jam/nokiajam3).
     /                    - Back
 
 Move the car around the grid and reach the target cell with all lights off to win.
-Moving to a cell flips that cell and it's four neighbouring cells.
+Moving to a cell flips that cell and it's four neighbouring cells in a + shape.
+
+For example, in this grid
+```
+A B C
+D E F
+G H I
+```
+moving to cell `E` will flip cells `B`, `D`, `E`, `F`, and `H`.
+
+The target cell is marked with light corners.
 
 **Editor Mode**
 
 Create your own levels and share them.
 Levels are created in reverse from target position to starting position.
-The editor works in three stages -
+The editor works in two stages -
 
  - Resize the grid using `1|7` and `3|9`. Move to the target cell and press `↲` to start drawing.
- - Move around to flip cells until one before the starting position and press `↲` to finish drawing.
- - A border around the screen will indicate the last move. Move one last time to finish creating the level.
+ - Move around to flip cells. Press `↲` to flip the start cell and finish drawing.
 
 A code will be displayed which can be entered in the loader from the level selection screen.
 
